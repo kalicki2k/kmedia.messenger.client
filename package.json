@@ -1,0 +1,15 @@
+{
+  "name": "kmedia.messenger.client",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://skhex/var/git/00000-K.MediaGbR-2-MessengerClient.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
