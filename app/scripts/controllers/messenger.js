@@ -2,25 +2,24 @@
 
 messengerApp.controller('MessengerCtrl', function ($scope, $cookies, socket) {
 
-    socket.on('add.message', function (message) {
-        $scope.messages.push(message);
+    socket.on('add.message', function (data) {
+        $scope.messages.push(data);
     });
-    
+
     $scope.messages = [];
     $scope.sendMessage = function () {
 
         socket.emit('send.message', {
+            user: $cookies.get('user.name'),
             message: $scope.message
         });
 
-        // add the message to our model locally
         $scope.messages.push({
-        //     user: $cookies.get('user.name'),
+             user: $cookies.get('user.name'),
              message: $scope.message
         });
 
-        // clear message box
-        //$scope.message = '';
+        $scope.message = '';
     };
 
 });

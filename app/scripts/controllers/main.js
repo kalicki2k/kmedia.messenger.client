@@ -2,14 +2,6 @@
 
 messengerApp.controller('MainCtrl', function ($scope, $cookies, $location, socket) {
 
-    socket.on('user.join', function (data) {
-        console.log(data);
-        //$scope.messages.push({
-        //    user: $cookies.get('user.name'),
-        //    message: 'join...'
-        //});
-    });
-
     $scope.submitForm = function () {
         var now = new Date(),
             expires = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
