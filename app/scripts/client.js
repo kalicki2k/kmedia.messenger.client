@@ -12,8 +12,8 @@ messengerApp.config(function ($routeProvider) {
             controller: 'MainCtrl'
         })
         .when('/messenger', {
-            templateUrl: 'views/messenger.html',
-            controller: 'MessengerCtrl'
+            templateUrl: 'views/chat.html',
+            controller: 'ChatCtrl'
         })
         .otherwise({
             redirectTo: '/'

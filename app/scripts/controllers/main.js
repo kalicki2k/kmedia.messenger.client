@@ -10,10 +10,6 @@ messengerApp.controller('MainCtrl', function ($scope, $cookies, $location, socke
             $cookies.put('user.' + key, $scope.user[key], {expires: expires});
         }
 
-        socket.emit('user.init', {
-            user: $scope.user
-        });
-
         $location.path('/messenger');
     };
 });
