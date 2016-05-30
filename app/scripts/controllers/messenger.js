@@ -41,7 +41,7 @@ messengerApp.controller('MessengerCtrl', function ($scope, $cookies, socket) {
         $scope.clients = clients;
     });
 
-    socket.on('client.join', function (client) {
+    socket.on('room.join', function (client) {
         $scope.clients.push(client);
     });
 
