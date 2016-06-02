@@ -3,8 +3,8 @@
 messengerApp.controller('MessengerCtrl', function ($scope, $cookies, socket) {
 
     $scope.room = '';
-    $scope.message = '';
-    $scope.messages = [];
+    // $scope.message = '';
+    // $scope.messages = [];
 
     $scope.getClient = function (event) {
         $scope.room = event.target.dataset.room;
@@ -14,7 +14,7 @@ messengerApp.controller('MessengerCtrl', function ($scope, $cookies, socket) {
         });
     };
 
-    $scope.sendMessage = function () {
+    /*$scope.sendMessage = function () {
 
         socket.emit('message.send', {
             user: $cookies.get('user.name'),
@@ -28,12 +28,12 @@ messengerApp.controller('MessengerCtrl', function ($scope, $cookies, socket) {
         });
 
         $scope.message = '';
-    };
+    };*/
 
 
-    socket.on('message.send', function (data) {
-        $scope.messages.push(data);
-    });
+    // socket.on('message.send', function (data) {
+    //     $scope.messages.push(data);
+    // });
 
     socket.emit('clients.all');
 
