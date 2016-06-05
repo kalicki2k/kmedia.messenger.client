@@ -4,14 +4,6 @@ messengerApp.controller('MessengerCtrl', function ($scope, $cookies, socket) {
 
     $scope.room = '';
     $scope.user = {};
-    $scope.customers = [];
-
-    $scope.joinRoom = function (event) {
-        $scope.room = event.target.dataset.room;
-        socket.emit('room.operator.join', {
-            room: $scope.room
-        });
-    };
 
     socket.emit('operator.join', {
         user: {
@@ -31,14 +23,4 @@ messengerApp.controller('MessengerCtrl', function ($scope, $cookies, socket) {
             $cookies.put('user.' + key, $scope.user[key], {expires: expires});
         }
     });
-
-    socket.on('room.all.customer', function (customers) {
-        $scope.customers = customers;
-    });
-
-    socket.on('room.customer.join', function (customer) {
-        $scope.customers.push(customer);
-    });
-
-})
-;
+});

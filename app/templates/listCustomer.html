@@ -1,0 +1,8 @@
+<ul>
+    <li ng-repeat="customer in customers"
+        ng-click="joinRoom($event)"
+        data-user="{{ customer.name }}"
+        data-room="{{ customer.socketId }}">
+        {{ customer.name }}
+    </li>
+</ul>
