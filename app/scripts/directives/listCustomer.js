@@ -1,10 +1,9 @@
 messengerApp.directive('listCustomer', function () {
 
     return {
-        // scope: {
-        //     user: '=',
-        //     room: '='
-        // },
+        scope: {
+            room: '='
+        },
         templateUrl: 'templates/listCustomer.html',
         restrict: 'E',
         controller: function ($scope, socket) {
@@ -16,6 +15,14 @@ messengerApp.directive('listCustomer', function () {
                     room: $scope.room
                 });
             };
+
+            socket.on('customer.leave', function (user) {
+                for (var index in $scope.customers) {
+                    if (user.socketId == $scope.customers[index].socketId) {
+                        $scope.customers.splice(index, 1);
+                    }
+                }
+            });
 
             socket.on('room.all.customer', function (customers) {
                 $scope.customers = customers;
