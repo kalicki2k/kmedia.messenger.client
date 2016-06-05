@@ -28,7 +28,6 @@ messengerApp.directive('messageBox', function () {
             };
 
             socket.on('message.received', function (massage) {
-                console.log('message.received: ', massage);
                 $scope.messages.push(massage);
             });
         }
