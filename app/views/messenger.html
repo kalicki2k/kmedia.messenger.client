@@ -1,24 +1,15 @@
 <div class="row">
     <div class="column medium-3">
         <ul>
-            <li ng-repeat="client in clients"
-                ng-click="getClient($event)"
-                data-room="{{ client.socketId }}">
-                {{ client.name }}
+            <li ng-repeat="customer in customers"
+                ng-click="joinRoom($event)"
+                data-user="{{ customer.name }}"
+                data-room="{{ customer.socketId }}">
+                {{ customer.name }}
             </li>
         </ul>
     </div>
     <div class="column medium-9">
-        <ul>
-            <li ng-repeat="message in messages">
-                <span>{{ message.user }}:</span> {{ message.message }}
-            </li>
-        </ul>
-        <form ng-submit="sendMessage()">
-            <input type="text" ng-model="message">
-            <input type="submit">
-        </form>
-
-        <message-box></message-box>
+        <message-box user="user.name" room="room"></message-box>
     </div>
 </div>

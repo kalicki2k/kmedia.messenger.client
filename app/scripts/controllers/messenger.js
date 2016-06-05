@@ -3,55 +3,15 @@
 messengerApp.controller('MessengerCtrl', function ($scope, $cookies, socket) {
 
     $scope.room = '';
-    // $scope.message = '';
-    // $scope.messages = [];
+    $scope.user = {};
+    $scope.customers = [];
 
-    $scope.getClient = function (event) {
+    $scope.joinRoom = function (event) {
         $scope.room = event.target.dataset.room;
-        $scope.messages = [];
-        socket.emit('room.join', {
+        socket.emit('room.operator.join', {
             room: $scope.room
         });
     };
-
-    /*$scope.sendMessage = function () {
-
-        socket.emit('message.send', {
-            user: $cookies.get('user.name'),
-            message: $scope.message,
-            room: $scope.room
-        });
-
-        $scope.messages.push({
-            user: $cookies.get('user.name'),
-            message: $scope.message
-        });
-
-        $scope.message = '';
-    };*/
-
-
-    // socket.on('message.send', function (data) {
-    //     $scope.messages.push(data);
-    // });
-
-    socket.emit('clients.all');
-
-    socket.on('clients.all', function (clients) {
-        $scope.clients = clients;
-    });
-
-    socket.on('room.join', function (client) {
-        $scope.clients.push(client);
-    });
-
-    socket.on('client.disconnect', function (user) {
-        for (var index in $scope.clients) {
-             if (user.socketId == $scope.clients[index].socketId) {
-                 $scope.clients.splice(index, 1);
-             }
-        }
-    });
 
     socket.emit('operator.join', {
         user: {
@@ -60,16 +20,25 @@ messengerApp.controller('MessengerCtrl', function ($scope, $cookies, socket) {
         }
     });
 
-    socket.on('operator.join', function (user) {
+    socket.on('operator.data', function (user) {
         var now = new Date(),
             expires = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
 
         $scope.user = user;
+        $scope.room = user.socketId;
 
         for (var key in $scope.user) {
             $cookies.put('user.' + key, $scope.user[key], {expires: expires});
         }
     });
 
+    socket.on('room.all.customer', function (customers) {
+        $scope.customers = customers;
+    });
 
-});
+    socket.on('room.customer.join', function (customer) {
+        $scope.customers.push(customer);
+    });
+
+})
+;
