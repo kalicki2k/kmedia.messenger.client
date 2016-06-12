@@ -4,6 +4,7 @@ messengerApp.controller('MessengerCtrl', function ($scope, $cookies, socket) {
 
     $scope.room = '';
     $scope.user = {};
+    $scope.dialog = [];
 
     socket.emit('operator.join', {
         user: {

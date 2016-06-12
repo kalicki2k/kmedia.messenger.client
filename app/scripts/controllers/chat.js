@@ -4,6 +4,7 @@ messengerApp.controller('ChatCtrl', function ($scope, $cookies, socket) {
 
     $scope.room = '';
     $scope.user = {};
+    $scope.dialog = [];
 
     socket.emit('customer.join', {
         user: {

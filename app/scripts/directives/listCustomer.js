@@ -2,7 +2,8 @@ messengerApp.directive('listCustomer', function () {
 
     return {
         scope: {
-            room: '='
+            room: '=',
+            dialog: '='
         },
         templateUrl: 'templates/listCustomer.html',
         restrict: 'E',
@@ -30,6 +31,10 @@ messengerApp.directive('listCustomer', function () {
 
             socket.on('room.customer.join', function (customer) {
                 $scope.customers.push(customer);
+            });
+
+            socket.on('room.dialog', function (dialog) {
+                $scope.dialog = dialog;
             });
         }
     }

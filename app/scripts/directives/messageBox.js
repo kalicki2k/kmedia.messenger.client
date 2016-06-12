@@ -3,24 +3,24 @@ messengerApp.directive('messageBox', function () {
     return {
         scope: {
             user: '=',
-            room: '='
+            room: '=',
+            dialog: '='
         },
         templateUrl: 'templates/messageBox.html',
         restrict: 'E',
-        controller: function ($scope, $cookies, socket) {
+        controller: function ($scope, socket) {
             $scope.message = '';
-            $scope.messages = [];
 
             $scope.sendMessage = function () {
 
                 socket.emit('message.sent', {
-                    user: $cookies.get('user.name'),
+                    user: $scope.user,
                     message: $scope.message,
                     room: $scope.room
                 });
 
-                $scope.messages.push({
-                    user: $cookies.get('user.name'),
+                $scope.dialog.push({
+                    user: $scope.user,
                     message: $scope.message
                 });
 
@@ -28,7 +28,7 @@ messengerApp.directive('messageBox', function () {
             };
 
             socket.on('message.received', function (massage) {
-                $scope.messages.push(massage);
+                $scope.dialog.push(massage);
             });
         }
     }
